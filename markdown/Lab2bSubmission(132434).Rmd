@@ -1,0 +1,116 @@
+
+1. `.libPaths()`: This function is used to get the file paths of R libraries. Libraries are collections of R functions, data, and compiled code in a well-defined format. This code checks the paths.
+
+2.`lapply(.libPaths(), list.files)`: This line lists the files in each library path. This is a way to see which packages are available in each library.
+
+3. `if (!is.element("languageserver", installed.packages()[, 1])) { install.packages("languageserver", dependencies = TRUE, repos = "https://cloud.r-project.org") }`: This code checks if the package "languageserver" is installed, and if not, it installs it from the CRAN repository. The "languageserver" package is used for R support in Visual Studio Code.
+
+4. `require("languageserver")`: This loads the "languageserver" package if it is available.
+
+5. The next section begins with  Methods used for sentiment analysis include:`. It provides an explanation of methods and levels used for sentiment analysis. However, it is mainly a comment section with no executable code.
+
+6. `# STEP 1. Install and Load the Required Packages`: This is a section that installs and loads several R packages. Each block of code checks if a package is installed and installs it if not, and then loads the package.
+
+   - Packages installed and loaded include: dplyr, ggplot2, ggrepel, ggraph, tidytext, tidyr, widyr, gridExtra, knitr, kableExtra, formattable, circlize, memery, magick, yarrr, radarchart, igraph, wordcloud2, and readr.
+
+7. `# STEP 2. Customize the Visualizations, Tables, and Colour Scheme`: This section defines functions for customizing visualizations and tables. 
+
+   - `blue_grey_theme()` customizes the appearance of plots using the ggplot2 package.
+   - `kable_theme()` customizes text tables using HTML formatting.
+
+8.`# STEP 3. Load the Dataset`: This section loads a dataset named `student_performance_dataset`. It uses the `read_csv` function from the `readr` package to read a CSV file.
+
+   - The CSV file path is "data/20230412-20230719-BI1-BBIT4-1-StudentPerformanceDataset.CSV".
+   - It specifies the column types using the `col_types` argument. Various columns are specified as factors and dates.
+
+9.`View(student_performance_dataset)`: This opens a viewer window to display the loaded dataset.
+
+10`dim(student_performance_dataset)`: This returns the dimensions (number of rows and columns) of the dataset.
+
+11.`sapply(student_performance_dataset, class)`: This applies the `class` function to each column of the dataset, showing the data types of each column.
+
+12. `glimpse(student_performance_dataset)`: This function provides a concise summary of the dataset, showing the structure and first few observations.
+
+13.`summary(student_performance_dataset)`: This provides a summary of each variable in the dataset, including measures like mean, median, minimum, maximum, and quartiles for numeric variables, and counts for factors.
+
+In summary, this R script sets up the environment, installs and loads necessary packages, customizes visualization themes, and loads a dataset for further analysis.
+This R function is made to load a student performance-related dataset. The data is read from a CSV file using the'read_csv' function from the'readr' package. The dataset includes a number of columns that indicate various facets of a student's behavior, preferences, and academic success.
+
+In some columns, categorical variables are defined as factors, therefore they are categorical variables. For instance, the three levels (A, B, and C) of 'class_group' reflect several class groupings. Levels 0 and 1 probably indicate male and female, with "gender" being another element.
+
+The format of the date in the 'YOB' column is four-digit years ('%Y'), which is viewed as a date. "Year of Birth" is most likely what this stands for.
+Other category variables, like "read content before lecture," "anticipate test questions," and so on, are scored on a 5-point Likert scale.
+
+Additionally, there are binary variables that express preferences or choices, such as "regret_choosing_bi" and "drop_bi_now."
+
+The collection also contains details about several facets of a student's lifestyle, including fitness routines, study techniques, and connections to family, friends, and love partners. Academic issues like tuition payment, absence waivers, and the final grade (referred to as the "GRADE") also have variances.
+
+Utilizing 'View(student_performance_dataset)', the dataset is then seen. 'dim(student_performance_dataset)' is used to verify its dimensions.
+
+The code then uses the functions "sapply(student_performance_dataset, class)" to verify and output each column's data type and "glimpse(student_performance_dataset)" to give a brief summary of the dataset's structure.
+
+STEP 4
+On the student_performance_dataset, the provided R code illustrates a structured data analysis procedure. It first sets up the data by adding a new column called Student's Gender that differentiates between "Male" and "Female" based on the existing gender column. The following procedures entail choosing relevant columns for analysis, eliminating any entries in the Average Course Evaluation Rating with missing values, and then agglomerating the data by class_group and Student's Gender to determine the average evaluation rating for each combination. These average ratings within each group are used to sort the final dataset in descending order.
+
+The algorithm then produces two images of the data for display. The first is a decorated tabular output that improves the presentation by renaming columns, applying color coding to the Average Course Evaluation Rating column, and adding decorations to the rows and columns. 
+
+STEP 5
+Text-based responses within the "student_performance_dataset" are managed by the accompanying R code, which is a thorough data pretreatment pipeline. The code begins by defining the 'expand_contractions' function, which makes it easier to expand contractions in text. After that, it moves on to manipulating the dataset. Due to the 'gender' information, a new column called 'Student's Gender' will be added, and column names will also be clarified. The code then chooses and improves columns related to preferences, eliminating instances of the "Average Course Evaluation Rating" with missing values, and organizing the dataset by "Class Group." The script carefully completes text processing duties such as contraction expansion, special character removal, and lowercase normalization. The produced dataset is then processed again.
+
+STEP 6
+The 'evaluation_likes_filtered' and 'evaluation_wishes_filtered' datasets, respectively, construct word count summaries for likes and desires using this R code. It first groups the data by "Student's Gender" for likes before figuring out how many words are in each category. According to word count, the results are arranged in decreasing order. The code then converts the word counts into a color-bar visual representation, clarifies the column names, and creates an HTML table with pertinent captions. The same procedures are used to calculate word counts for each class group. For wants, the procedure is repeated; this time, the code groups the data by gender and class before determining the word counts, arranging them, and producing visually appealing HTML tables.  This code effectively provides comprehensive insights into the distribution of significant words in the likes and wishes responses, after excluding contractions, special characters, stopwords, short words, and censored words. The resulting HTML tables are formatted using Bootstrap options for improved presentation.
+
+STEP 7
+
+This R code is dedicated to analyzing the most frequently used words in course evaluation likes, broken down by different categories. The code operates in several steps:
+
+1. **Likes Analysis by Gender**:
+   - The code first selects relevant columns, including `Class Group`, `Student's Gender`, `Average Course Evaluation Rating`, and tokenized likes. It then filters the data for female students and counts the frequency of each unique tokenized like. The top 10 words are selected based on frequency, and the plot visualizes these words along with their respective frequencies. This process is repeated for male students.
+
+2. **Likes Analysis by Class Group**:
+   - Similar to the gender analysis, the code selects the relevant columns and filters data by class groups A, B, and C. It then counts the frequency of each unique tokenized like, selects the top 10 words, and visualizes them along with their respective frequencies.
+
+3. **Likes Analysis by Gender and Class Group**:
+   - The code groups the data by `Student's Gender` and counts the frequency of each unique tokenized like for both male and female students. It then selects the top 10 words and creates a facetted plot, displaying the most frequently used words for each gender.
+
+4. **Likes Analysis by Class Group**:
+   - Similarly, the code groups the data by `Class Group` and counts the frequency of each unique tokenized like for class groups A, B, and C. The top 10 words are selected, and a facetted plot is generated to display the most frequently used words for each class group.
+
+Overall, this code provides a detailed analysis of the most commonly used words in course evaluation likes, offering insights based on gender and class group distinctions. The visualizations generated from this code are instrumental in understanding the sentiments and preferences expressed by students in their evaluations.
+
+STEP 8
+With the help of this R script, you can create word clouds that show how frequently tokenized likes and wants appear in course evaluations. The code is broken down as follows:
+
+1. "Likes Word Cloud": The frequency of each distinct tokenized like is counted to analyze the "evaluation_likes_filtered" data. The outcomes are organized in decreasing order.
+
+   - 'wordcloud2()' is then used to generate an interactive word cloud visualization. The'size' parameter determines how big the word cloud will be in total.
+
+2. **Wishes Word Cloud** – In a manner similar to the likes analysis, the 'evaluation_wishes_filtered' data is handled by measuring the frequency of each distinct tokenized wish. The outcomes are organized in decreasing order.
+
+   - Wordcloud2() is used to create yet another interactive word cloud, this time to display the frequency of tokenized wishes.
+In summary, this code segment produces interactive word clouds for both likes and wishes from the course evaluations. These word clouds provide a visual representation of the most frequently used terms in the likes and wishes sections, allowing for quick insights into the sentiments and preferences expressed by students. The size of the words in the cloud is indicative of their frequency.
+
+STEP 9
+This R code segment is focused on performing text mining and analysis on the tokenized likes and wishes from the course evaluations dataset. It utilizes Term Frequency-Inverse Document Frequency (TF-IDF) scores to identify the most significant words in the likes and wishes. Here's a breakdown:
+
+1. **Likes TF-IDF Score by Gender**:
+   - The code begins by extracting unique tokens from the tokenized likes, filtering out undesirable words, and removing tokens with less than 4 characters. It then calculates the TF-IDF score for each word with respect to gender.
+
+   - The top TF-IDF words are extracted, sorted, and visualized using a grouped bar chart for both male and female students. The x-axis represents the words, while the y-axis represents the TF-IDF score.
+
+2. **Likes TF-IDF Score by Class Group**:
+   - Similar to the gender-based analysis, this part of the code calculates the TF-IDF score for each word, this time with respect to class groups.
+
+   - Again, the top TF-IDF words are extracted, sorted, and visualized using a grouped bar chart for each class group.
+
+3. **Wishes TF-IDF Score by Gender and Class Group**:
+   - The same process is repeated for tokenized wishes, analyzing TF-IDF scores based on both gender and class groups.
+
+   - The top TF-IDF words are extracted, sorted, and visualized in grouped bar charts for male and female students, as well as for each class group.
+
+In conclusion, this code segment uses TF-IDF scores to pinpoint and depict the key phrases from the course evaluations' Likes and Wishes sections. It helps in comprehending the feelings and preferences stated by pupils and sheds light on the diverse language used by various groups. The visualizations assist in emphasizing the importance of particular words in each situation.
+
+
+
+
+
